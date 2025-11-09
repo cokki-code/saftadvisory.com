@@ -1,0 +1,294 @@
+/* Experimental overrides only. Theme tokens are canonical in css/style.css.
+   Use this file for quick tweaks and site-specific overrides. */
+
+/* Header company name: authoritative rule to prevent browser default visited-purple */
+.main-nav .company-name a,
+.main-nav .company-name a:link,
+.main-nav .company-name a:visited,
+.main-nav .company-name a:hover,
+.main-nav .company-name a:active,
+.main-nav .company-name a:focus {
+  color: var(--maroon) !important;
+  text-decoration: none !important;
+}
+
+/* Key maroon accents (overrides) */
+.nav-links a:hover,
+.nav-links a:focus {
+  color: var(--maroon) !important;
+}
+.nav-links a::after {
+  background: var(--maroon) !important;
+}
+.hero-title { color: var(--maroon) !important; }
+.company-info-quote { color: var(--maroon) !important; }
+.team-group-title { border-bottom-color: var(--maroon) !important; }
+.main-footer { background: var(--maroon) !important; }
+.scroll-top-btn { background: var(--maroon) !important; }
+.scroll-top-btn:hover { background: var(--maroon-dark) !important; }
+
+/* Ensure the scroll-top button is fixed to bottom-right on every page. Use !important to override
+   any accidental page-level overrides or inline styles that may be present. */
+.scroll-top-btn {
+  position: fixed !important;
+  right: 24px !important; 
+  bottom: 24px !important;
+  display: flex !important;
+  z-index: 9999 !important;
+}
+
+/* Fallback color for company-name container */
+.company-name { color: var(--maroon) !important; }
+
+/* Ensure the overall page background uses the grey token and the centered container is transparent
+   so the light-grey page background is visible around white cards and sections. Use !important to
+   override inline/page-specific rules. */
+body { background: var(--bg) !important; }
+.container { background: transparent !important; }
+.main-content, main { background: transparent !important; }
+
+/* Make subtle surfaces use the muted token where practical (helps add more grey without changing
+   existing white card surfaces) */
+.company-info-block, .team-card, .activities-card, .achievement-card, .about-accent-block {
+  /* Use muted grey for card surfaces to reduce stark white and show more grey theme. Keep
+     box shadow and borders from original stylesheet. */
+  background: var(--muted) !important;
+  border: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* Center most page content (text and sections) without disturbing image crops.
+   Add a helper class `center-content` on the page wrapper to keep changes scoped. */
+.center-content { text-align: center; }
+.center-content .company-info-block, .center-content .team-card, .center-content .activities-images-grid { text-align: center; }
+.center-content .company-info-block .company-info-details { text-align: left; }
+
+/* Modal & responsive video overrides - enlarge and center the YouTube player. */
+.modal {
+  display: none; /* controlled by inline JS which sets display:flex */
+  position: fixed;
+  inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
+  background: rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+.modal .modal-content.video-center {
+  width: 95%;
+  max-width: 1100px; /* allow the video to be noticeably larger */
+  max-height: 90vh;
+  background: transparent; /* keep original background look */
+  box-shadow: none;
+  position: relative;
+  display: block;
+}
+.modal .modal-content.video-center .close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 10001;
+  color: #fff;
+  background: rgba(0,0,0,0.35);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 22px;
+}
+/* Make iframe scale to the modal width and keep 16:9 aspect ratio */
+#youtubeFrame {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16/9;
+  max-height: calc(90vh - 40px);
+  border-radius: 8px;
+  display: block;
+}
+
+/* Make the play button stand out on narrow screens and ensure modal padding doesn't clip */
+@media (max-width: 480px) {
+  .modal { padding: 12px; }
+  .modal .modal-content.video-center { width: 100%; }
+  .button.play-video-btn.minimal-btn { padding: 14px 18px; }
+}
+
+/* Styles for About page stats and testimonial (moved from homepage) */
+.home-stats-section { margin-top: 36px; }
+.home-stats-grid { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+.home-stats-grid .stat-card { text-align:center; padding:14px 20px; background: #fff; border: 1px solid rgba(0,0,0,0.06); min-width:160px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+.home-stats-grid .stat-card h3 { font-size:1.6rem; margin:6px 0; color:var(--maroon); }
+.home-stats-grid .stat-card p { margin:0; color:#444; }
+
+.home-quote-section { margin-top:18px; display:flex; justify-content:center; }
+.testimonial-card { max-width:820px; background: #fff; padding:20px 24px; border-radius:8px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.04); }
+.testimonial-card blockquote { font-size:1.06rem; margin:0 0 10px 0; color:#222; }
+.testimonial-author { text-align:right; font-weight:700; color:var(--muted-text); }
+
+@media (max-width:640px){
+  .home-stats-grid { gap:12px; }
+  .home-stats-grid .stat-card { min-width: 46%; }
+  .testimonial-card { padding:16px; }
+}
+
+/* Featured product card styles */
+.featured-product-section .product-card { background:#fff; border:1px solid rgba(0,0,0,0.06); box-shadow:0 8px 22px rgba(0,0,0,0.06); border-radius:8px; overflow:hidden; cursor:pointer; transition:transform 160ms ease, box-shadow 160ms ease; }
+.featured-product-section .product-card:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.10); }
+.featured-product-section .product-card-body { padding:12px 14px; }
+
+/* Ensure the top product row lays out side-by-side on desktop (3-up). This mirrors the
+   bottom row which is centered and uses flex. Having this rule at the default scope
+   prevents the top row from stacking as vertical blocks on wide screens. */
+.featured-product-section .product-row-top {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive product grid (useful to replace inline flex). The grid will fit as many 300px cards as possible
+   and center them. On very small screens it stacks into a single column. */
+.featured-product-section .product-list {
+  display: block; /* we use row wrappers to control layout */
+  max-width: calc(3 * 340px + 2 * 24px); /* wider cards reduce empty space */
+  margin: 0 auto; /* center list container horizontally */
+}
+
+/* Make buttons inside modals consistent and prominent */
+.product-modal-content .button {
+  background: var(--maroon);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.product-modal-content .button:hover { opacity: 0.95; }
+
+@media (max-width: 980px) {
+  .featured-product-section .product-list { max-width: 720px; }
+  .featured-product-section .product-row-top { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+  .featured-product-section .product-row-bottom { display:flex; gap:18px; justify-content:center; }
+}
+
+@media (max-width: 560px) {
+  .featured-product-section .product-list { max-width: 100%; padding: 6px 12px; }
+  .featured-product-section .product-row-top { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .featured-product-section .product-row-bottom { display:flex; gap:12px; justify-content:center; }
+  .product-modal-content { width: 96%; padding: 12px; }
+  .product-modal-content img { width: 100%; height: auto; }
+}
+
+  /* Featured product band to contain cards and reduce blank space */
+  .featured-product-band {
+    background: #fff;
+    padding: 18px 22px 20px 22px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+    margin: 6px auto 18px auto;
+  }
+
+  /* Slightly larger card images to fill horizontal space */
+  .featured-product-section .product-card img {
+    width: 340px !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    display: block;
+  }
+
+  .featured-product-section .product-card { width: 340px; }
+  .product-card-body .card-tagline { font-size:0.95rem; color:var(--muted-text); }
+
+  /* Activity gallery specific helpers (used by activities.html) */
+  .activities-page { background: transparent; }
+
+/* Product modal tweaks */
+.product-modal-content { width:95%; max-width:980px; max-height:85vh; overflow:auto; background:#fff; border-radius:8px; padding:18px; }
+.product-modal-content img { border-radius:6px; }
+.modal .close { color:#222; }
+
+@media (max-width:720px){
+  .product-modal-content { padding:14px; }
+  .featured-product-section .product-card img { width:100%; height:auto; }
+}
+
+/* Achievements / Hall of Fame tweaks */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* force 3 columns on desktop */
+  gap: 28px;
+  padding: 16px;
+}
+.achievements-grid .team-card { position: relative; min-height: 340px; }
+.achievement-badge svg { filter: drop-shadow(0 8px 18px rgba(0,0,0,0.12)); border-radius: 50%; }
+.achievements-grid .team-name { font-size: 1.05rem; }
+.achievements-grid .team-role { color: #666; font-weight: 700; }
+
+/* Position the badge inside the card (top-right corner) without escaping the card bounds */
+.team-card .achievement-badge { position: absolute; right: 18px; top: 18px; width: auto; height: auto; z-index: 3; }
+.team-card .achievement-badge svg { display: block; border-radius: 50%; }
+
+/* On very small screens hide badges to avoid visual clutter and overlap with the nav */
+@media (max-width: 520px) {
+  .team-card .achievement-badge { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .achievements-grid { gap: 16px; padding: 12px; grid-template-columns: 1fr; }
+  .achievements-grid .team-card { min-height: auto; }
+}
+
+/* medium screens: 2 columns */
+@media (max-width: 920px) and (min-width: 641px) {
+  .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Make the Hall of Achievements title stand out and center the subtitle */
+.achievement-section .achievement-card h2 {
+  font-size: 2.4rem; /* larger than default */
+  font-weight: 900; /* extra bold */
+  color: var(--maroon);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.achievement-section .achievement-card p {
+  text-align: center; /* center the paragraph under the heading */
+  max-width: 920px;
+  margin: 0 auto;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 880px) {
+  .achievement-section .achievement-card h2 { font-size: 1.9rem; }
+  .achievement-section .achievement-card p { font-size: 1rem; padding: 0 12px; }
+}
+
+/* Activities gallery: featured image + mosaic grid */
+.activities-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; margin-top: 18px; }
+.activities-gallery .featured-image { background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9)); padding: 18px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); text-align: center; }
+.activities-gallery .featured-image img { width: 100%; height: auto; max-height: 420px; object-fit: cover; border-radius: 10px; transition: transform 300ms ease, box-shadow 300ms ease; }
+.activities-gallery .featured-image:hover img { transform: scale(1.02); box-shadow: 0 14px 40px rgba(0,0,0,0.12); }
+.activities-gallery .featured-caption { margin-top: 10px; font-weight: 600; color: var(--maroon); }
+
+.mosaic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mosaic-item { background: transparent; border: none; padding: 0; cursor: pointer; border-radius: 10px; overflow: hidden; display: block; }
+.mosaic-item img { width: 100%; display: block; height: 100px; object-fit: cover; transition: transform 220ms ease, filter 220ms ease; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.mosaic-item:hover img, .mosaic-item:focus img { transform: scale(1.06); filter: saturate(1.05) contrast(1.02); }
+
+/* Make the second mosaic tile span two rows to emphasize it visually */
+.mosaic-item:nth-child(2) img { height: 214px; }
+
+/* Responsive: stack on small screens */
+@media (max-width: 880px) {
+  .activities-gallery { grid-template-columns: 1fr; }
+  .mosaic-grid { grid-template-columns: repeat(3, 1fr); }
+  .mosaic-item:nth-child(2) img { height: 120px; }
+}
+
+@media (max-width: 480px) {
+  .mosaic-grid { gap: 8px; }
+  .mosaic-item img { height: 86px; }
+  .activities-gallery .featured-image img { max-height: 260px; }
+}
+
+  /* End of file overrides */

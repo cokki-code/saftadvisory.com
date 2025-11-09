@@ -1,0 +1,352 @@
+:root {
+    /* Maroon palette (primary) */
+    --maroon: #8B0000;
+    --maroon-2: #b3003c;
+    --maroon-dark: #6b0000;
+    --maroon-rgb: 139,0,0;
+    --accent: #ff6a00;
+
+    /* Neutral / theme tokens (for easier tuning) */
+    --bg: #f4f6f8;          /* page background: light cool grey */
+    --surface: #ffffff;     /* cards, nav, surfaces */
+    --muted: #f6f7fa;       /* subtle surface */
+    --text: #222222;        /* primary text */
+    --muted-text: #4a4a4a;  /* secondary text / nav links */
+    --hero-accent: #fff4e6; /* warm hero accent */
+    --hero-border: #ffd6b3; /* warm hero border */
+    --on-surface: #ffffff;  /* text/icon color when on colored surface */
+}
+
+/* Theme variants: switch by setting `data-theme` on the <html> element.
+   Default (no data-theme or data-theme="light") uses the :root tokens above. */
+html[data-theme="grey"] {
+    --bg: #e6e7e8;         /* page background: slightly darker light grey */
+    --muted: #eef0f2;      /* subtle surface: off-white/soft grey */
+    --surface: #ffffff;
+    /* keep maroon accents same */
+    --maroon: #800000; --maroon-2: #b3003c; --maroon-dark: #a00000; --maroon-rgb: 128,0,0;
+}
+
+html[data-theme="maroon"] {
+    /* Maroon-forward variant: slightly warm background and deeper maroon accents */
+    --bg: #f5ebe9;         /* warm off-white */
+    --muted: #faefee;      /* faint maroon-tinted surface */
+    --surface: #ffffff;
+    --maroon: #660000; --maroon-2: #900019; --maroon-dark: #4d0000; --maroon-rgb: 102,0,0;
+}
+
+/* Core utilities and layout */
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+.container, .main-content, main, section { max-width: 1200px; margin: 0 auto; padding: 24px 16px; display: block; }
+
+/* Navigation/header */
+.main-nav { display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 0 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-bottom: 4px solid var(--maroon); }
+.nav-left { display: flex; align-items: center; gap: 12px; }
+.logo { height: 56px; width: 56px; object-fit: contain; border-radius: 8px; background: var(--muted); box-shadow: 0 2px 8px rgba(var(--maroon-rgb),0.10); }
+.company-name { font-size: 1.8em; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin: 0; display: flex; align-items: center; }
+.company-name a { color: var(--maroon); text-decoration: none; font-weight: 900; letter-spacing: 2px; font-family: 'Segoe UI', Arial, sans-serif; transition: color 0.2s; font-size: 1em; }
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; margin: 0; padding: 0; }
+.nav-links a { color: var(--muted-text); font-weight: 700; text-decoration: none; font-size: 0.95em; letter-spacing: 0.3px; padding: 2px 0; position: relative; }
+.nav-links a::after { content: ''; display: block; height: 2px; width: 0; background: var(--maroon); transition: width 0.3s cubic-bezier(.4,0,.2,1); position: absolute; left: 0; bottom: -2px; }
+.nav-links a:hover::after, .nav-links a:focus::after { width: 100%; }
+.nav-links a:hover, .nav-links a:focus { color: var(--maroon); }
+
+/* Hero */
+.hero-section { background: linear-gradient(120deg,var(--surface) 0%,var(--hero-accent) 100%); padding: 48px 0 32px; text-align: center; border-bottom: 2px solid var(--hero-border); }
+.hero-logo { width: 120px; height: 120px; object-fit: contain; border-radius: 18px; margin-bottom: 18px; box-shadow: 0 4px 24px rgba(var(--maroon-rgb),0.10); background: var(--surface); }
+.hero-title { font-size: 2.8em; font-weight: 900; color: var(--maroon); margin-bottom: 8px; }
+.hero-tagline { font-size: 1.3em; color: var(--maroon-2); margin-bottom: 18px; font-weight: 600; }
+
+/* Buttons */
+.button, .hero-cta, .minimal-btn, .play-video-btn { display: inline-block; background: linear-gradient(90deg,var(--accent) 0%, var(--maroon) 100%); color: var(--on-surface); border: none; border-radius: 24px; padding: 12px 32px; font-size: 1.1em; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.08); transition: transform .18s, box-shadow .18s; }
+.button:hover, .hero-cta:hover, .minimal-btn:hover, .play-video-btn:hover { background: linear-gradient(90deg,var(--maroon) 0%, var(--accent) 100%); box-shadow: 0 12px 34px rgba(0,0,0,0.14); transform: translateY(-3px) scale(1.03); }
+
+/* Company info / blocks */
+.company-info-block {
+    /* subtle, airy card with a faint warm accent */
+    background: linear-gradient(180deg, rgba(255,106,0,0.03) 0%, rgba(255,255,255,0.96) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(139,0,0,0.06);
+    box-shadow: 0 8px 30px rgba(20,20,20,0.06);
+    margin: 28px 40px;
+    padding: 28px 48px;
+    max-width: none;
+    width: calc(100% - 80px);
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    text-align: left;
+}
+.company-info-logo { width: 96px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(var(--maroon-rgb),0.10); }
+.company-info-quote { font-size: 1.15em; font-style: italic; margin-bottom: 8px; color: var(--maroon); }
+
+/* Grids */
+.activities-images-grid, .team-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; align-items: center; }
+.activities-images-grid img, .team-card img { max-width: 180px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+/* Headings */
+h1, h2, h3, h4 { text-align: center; font-weight: 700; margin: .5em 0; }
+h1, h2 { color: var(--maroon); }
+
+/* Footer */
+.main-footer { background: linear-gradient(90deg, var(--maroon) 0%, var(--maroon-dark) 100%); color: #fff; padding: 20px 0; border-radius: 0; box-shadow: 0 -6px 24px rgba(0,0,0,0.08); }
+.footer-logo { width: 36px; vertical-align: middle; }
+.footer-company-name { font-size: 1.5em; font-weight: 700; margin-left: 12px; }
+
+/* Footer layout: keep logo+name left, quick links on the right */
+.main-footer .footer-content { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.main-footer {
+    width: 100%;
+    position: relative;
+    margin-top: 64px; /* gap between content and footer */
+}
+.footer-logo-name { display: flex; align-items: center; gap: 12px; }
+.footer-social { display: flex; gap: 12px; align-items: center; }
+
+@media (max-width: 760px) {
+    .main-footer .footer-content { flex-direction: column; text-align: center; padding: 12px 16px; gap: 12px; }
+    .footer-logo-name { justify-content: center; }
+    .footer-social { justify-content: center; }
+}
+
+/* Team */
+.team-title { font-size: 2.8em; font-weight: 800; margin-bottom: 32px; letter-spacing: 1px; color: var(--text); }
+.team-group-title { font-size: 2em; font-weight: 700; margin-bottom: 18px; letter-spacing: 1px; color: var(--text); border-bottom: 3px solid var(--maroon); display: inline-block; padding: 0 18px 6px; background: var(--surface); border-radius: 6px 6px 0 0; }
+/* Grid layout for team sections: use dense packing and fixed max column width so
+   incomplete rows are centered and items pack neatly. */
+.team-grid {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 320px));
+    gap: 28px;
+    justify-content: center; /* center the grid's columns, so a single item sits centered */
+    align-items: start;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+/* Management group: arrange as 3 on the top row and 2 centered beneath by using
+   a 5-column placement. This lets the 4th and 5th items sit between the top
+   three (visually centered under the gaps). Falls back to the original
+   auto-fit behavior on narrower screens. */
+.team-grid.management {
+    /* five narrow columns so we can place items into gaps */
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    gap: 28px;
+    justify-items: stretch;
+}
+
+/* Explicit placement: first three items occupy columns 1,3,5; the next two sit
+   in columns 2 and 4 so they appear centered between the top three. */
+.team-grid.management > .team-card:nth-child(1) { grid-column: 1; }
+.team-grid.management > .team-card:nth-child(2) { grid-column: 3; }
+.team-grid.management > .team-card:nth-child(3) { grid-column: 5; }
+.team-grid.management > .team-card:nth-child(4) { grid-column: 2; }
+.team-grid.management > .team-card:nth-child(5) { grid-column: 4; }
+
+/* Responsive fallbacks: on narrower screens revert to compact columns and
+   remove explicit grid placement so standard packing and wrapping occurs. */
+@media (max-width: 1100px) {
+    .team-grid.management {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 320px));
+    }
+    .team-grid.management > .team-card { grid-column: auto; }
+}
+
+@media (max-width: 640px) {
+    .team-grid.management {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+    }
+    .team-grid.management > .team-card { grid-column: auto; }
+}
+
+/* Make all cards the same visual height so rows align beautifully. */
+.team-card {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 8px 26px rgba(10,10,20,0.06);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    width: 100%; /* fill the grid cell */
+    border: 1px solid rgba(0,0,0,0.04);
+    overflow: hidden;
+    min-height: 360px; /* ensures cards in the same row line up */
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: 0 18px 46px rgba(10,10,20,0.12); border-color: rgba(255,106,0,0.12); }
+
+/* Photo handling: keep a slightly taller crop and bias the crop toward the upper area
+   so faces/head area are visible for most portrait photos. */
+.team-card img {
+    width: 100%;
+    height: 210px; /* slightly taller to reduce aggressive cropping */
+    object-fit: cover;
+    object-position: 50% 18%; /* show more of the upper portion (faces) by default */
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(var(--maroon-rgb),0.06);
+    border: none;
+    background: var(--muted);
+    display: block;
+    margin: 0 auto;
+    transition: transform .28s ease;
+}
+.team-card img:hover { transform: scale(1.03); }
+
+/* Per-group image tweaks: slightly adjust vertical crop bias for different groups */
+.team-grid.directors .team-card img { object-position: 50% 12%; }
+.team-grid.management .team-card img { object-position: 50% 18%; }
+.team-grid.unity .team-card img { object-position: 50% 20%; }
+
+/* Fine-tune individual images when a single source needs adjustment.
+   Targeting the management group Syed Abdullah image so it centers better. */
+.team-grid.management .team-card img[src$="ayie.png"] {
+    object-position: 50% 50%; /* center this image */
+}
+
+/* Center Syaffuan's image in the management group */
+.team-grid.management .team-card img[src$="syaffuan.png"] {
+    object-position: 50% 12%; /* shift crop upward to show more of the upper head */
+}
+
+/* Accent stripe at top of each card */
+.team-card::before { content: ''; display: block; height: 6px; width: 100%; background: linear-gradient(90deg, var(--accent), var(--maroon)); margin-bottom: 10px; border-radius: 6px 6px 0 0; }
+
+/* Ensure the card content aligns so names/roles sit consistently near the card base */
+.team-info { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 12px; }
+.team-name { margin-bottom: 6px; }
+.team-role { color: #555; font-size: 0.9rem; }
+
+/* Decorative underline that appears on hover */
+.team-name::after { content: ''; display: block; width: 36px; height: 4px; background: var(--accent); border-radius: 3px; margin: 8px auto 0; transform: translateY(6px); opacity: 0; transition: transform .22s ease, opacity .22s ease; }
+.team-card:hover .team-name::after { transform: translateY(0); opacity: 1; }
+
+/* Team text */
+.team-info { margin-top: 12px; }
+.team-name { font-weight: 800; color: var(--maroon); font-size: 0.95rem; letter-spacing: 0.6px; }
+.team-role { font-size: 0.86rem; color: #444; margin-top: 6px; line-height: 1.2; }
+
+/* Responsive tweaks: prevent overly tall cards on small screens and reduce image crop */
+@media (max-width: 640px) {
+    .team-card { min-height: auto; }
+    .team-card img { height: 180px; object-position: 50% 22%; }
+}
+
+/* Responsive: two-column layout on medium screens, single column on very small screens */
+@media (max-width: 920px) {
+    .team-card { width: calc(50% - 18px); flex: 0 0 calc(50% - 18px); }
+}
+@media (max-width: 520px) {
+    .team-card { width: 100%; flex: 0 0 100%; }
+}
+
+/* Section centering helpers */
+.teams-section { text-align: center; margin: 0 auto; padding: 36px 16px; }
+.teams-section .team-group { margin-bottom: 36px; width: 100%; }
+
+/* Make company info and footers centered inside container (kept minimal: footer remains centered) */
+.company-info-logo-quote { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 0 0 360px; }
+.company-info-logo-quote .company-info-logo { width: 96px; height: auto; }
+.company-info-logo-quote .company-info-quote { margin: 0; text-align: center; white-space: normal; max-width: 520px; overflow: visible; text-overflow: clip; }
+.company-info-details { flex: 1 1 auto; margin-left: auto; padding-left: 24px; text-align: left; }
+
+/* Full-bleed and stronger separation starting at laptop widths */
+@media (min-width: 1200px) {
+    /* make the card full-bleed on typical laptop widths */
+    .company-info-block {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        gap: 200px;               /* increase separation */
+        border-radius: 0;
+    }
+    /* make left column narrower and push details further right */
+    .company-info-logo-quote { flex: 0 0 220px; padding: 48px 48px; }
+    .company-info-details { padding: 48px 48px; padding-left: 120px; position: relative; max-width: 520px; margin-left: auto; }
+    .company-info-details::before {
+        content: "";
+        position: absolute;
+        left: 56px;
+        top: 24px;
+        bottom: 24px;
+        width: 2px;                  /* slightly thicker divider */
+        background: rgba(128,0,0,0.14); /* stronger maroon divider */
+    }
+}
+
+/* Full-bleed look on very wide screens: reduce side margins so the card stretches nearly edge-to-edge */
+@media (min-width: 1400px) {
+    /* make the card full-bleed: remove outer card padding and margins */
+    .company-info-block {
+        margin: 0;                    /* touch the full viewport horizontally */
+        width: 100%;
+        padding: 0;                   /* remove inner padding on the card for extreme full-bleed */
+        gap: 220px;                   /* extra separation between left and right */
+        border-radius: 0;
+    }
+    /* keep comfortable inner gutters on each column so text doesn't hit the viewport edge */
+    .company-info-logo-quote { flex: 0 0 340px; padding: 48px 40px; }
+    .company-info-details { padding: 48px 40px; padding-left: 56px; position: relative; }
+    /* subtle vertical divider between columns */
+    .company-info-details::before {
+        content: "";
+        position: absolute;
+        left: 28px;                 /* position divider near the left edge of details column */
+        top: 24px;
+        bottom: 24px;
+        width: 1px;
+        background: rgba(179,0,60,0.08); /* subtle maroon divider */
+    }
+}
+.company-info-details h3 { margin-top: 6px; color: var(--maroon); font-size: 1.2rem; }
+.company-info-details p { margin: 6px 0; color: #333; line-height: 1.45; }
+
+/* Responsive: stack columns on small screens and center content */
+@media (max-width: 880px) {
+    .company-info-block { width: auto; margin: 24px 16px; flex-direction: column; align-items: center; text-align: center; padding: 18px; gap: 18px; }
+    .company-info-logo-quote { align-items: center; }
+    .company-info-logo-quote .company-info-quote { white-space: normal; max-width: 100%; overflow: visible; text-overflow: clip; }
+    .company-info-details { padding-left: 0; margin-left: 0; }
+}
+
+/* Activities specifics */
+.activities-month-title { font-size: 2em; font-weight: 800; color: var(--maroon); margin-bottom: 18px; text-align: left; }
+.activities-event-subtitle { font-size: 1.15em; font-weight: 600; color: var(--maroon); margin-bottom: 16px; }
+.activities-search-bar label { color: var(--maroon); font-weight: 600; margin-right: 12px; }
+.activities-search-bar select { border: 1px solid var(--maroon); }
+
+/* Scroll to top */
+.scroll-top-btn { position: fixed; right: 24px; bottom: 24px; background: var(--maroon); color: var(--on-surface); border: none; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 2em; cursor: pointer; box-shadow: 0 2px 8px rgba(var(--maroon-rgb),0.12); z-index: 100; }
+.scroll-top-btn:hover { background: var(--maroon-dark); }
+
+/* Theme switcher UI removed: site now uses grey/white/maroon tokens by default. */
+
+/* Responsive tweaks */
+@media (min-width: 1400px) {
+    /* Very wide screens — push content further apart */
+    .company-info-block {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        gap: 240px;
+        border-radius: 0;
+    }
+    /* even more dramatic separation on very wide screens */
+    .company-info-logo-quote { flex: 0 0 180px; padding: 64px 64px; }
+    .company-info-details { padding: 64px 64px; padding-left: 160px; position: relative; max-width: 640px; margin-left: auto; }
+    .company-info-details::before {
+        left: 72px;
+        width: 2px;
+        background: rgba(128,0,0,0.16);
+    }
+}
+.company-name, .company-name a { color: var(--maroon) !important; }
+.nav-links a::after { background: var(--maroon) !important; }
