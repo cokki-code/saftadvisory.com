@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SAFT Advisory - Activities</title>
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/overrides.css">
+    <style>
+        /* scoped page layout */
+        .activities-page { max-width:1100px; margin:18px auto; padding:8px 16px; }
+        .activities-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+        .activities-header h1 { margin:0; color:var(--maroon); }
+        .activities-controls { display:flex; gap:12px; align-items:center; }
+        .activities-month { margin-bottom:26px; }
+        .event-group { background:#fff; border-radius:10px; padding:14px; box-shadow:0 8px 20px rgba(0,0,0,0.04); margin-bottom:14px; }
+        .event-meta { font-weight:700; color:#333; margin-bottom:8px; }
+        .event-gallery { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start; }
+        .event-item { width:240px; background:#f7f7f7; border-radius:8px; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,0.04); }
+        .event-item img { width:100%; height:160px; object-fit:cover; display:block; }
+        .event-caption { padding:8px 10px; font-size:0.95rem; color:#444; }
+        @media (max-width:720px){ .event-item { width:48%; } }
+        @media (max-width:420px){ .event-item { width:100%; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="nav-left">
+                <img src="images/saft.png" alt="SAFT Advisory Logo" class="logo">
+                <h1 class="company-name"><a href="index.html">SAFT ADVISORY</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="activities.html" class="active">Activities</a></li>
+                <li><a href="teams.html">Teams</a></li>
+                <li><a href="achievement.html">Achievement</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <button class="scroll-top-btn" id="scrollTopBtn" title="Back to Top" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill="var(--maroon)"/>
+                <path d="M16 10 L16 22" stroke="#FF6600" stroke-width="3" stroke-linecap="round"/>
+                <path d="M10 16 L16 10 L22 16" stroke="#FF6600" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+        </button>
+
+            <div class="main-content center-content">
+                <main class="activities-page" role="main">
+            <div class="activities-header">
+                <h1>Activities — Events archive</h1>
+                <div class="activities-controls">
+                    <label for="month-select" style="font-weight:700; color:var(--muted-text);">View month:</label>
+                    <select id="month-select" onchange="showMonthActivities()">
+                        <option value="sep2025">September 2025</option>
+                        <option value="jan2025">January 2025</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="activities-content">
+                        <!-- September 2025 (simplified featured + mosaic like January) -->
+                        <section class="activities-month" id="sep2025">
+                            <h2 style="color:var(--maroon);">September 2025</h2>
+                            <p style="margin-top:0; color:var(--muted-text);">Family Day highlights — click any thumbnail to view it as the featured photo.</p>
+
+                            <div class="event-group">
+                                <div class="event-meta">Family Day — September 2025</div>
+                                <div class="activities-gallery">
+                                    <div class="featured-image" id="sepFeaturedImage">
+                                        <img src="images/familyday1.png" alt="Featured Family Day image">
+                                        <div class="featured-caption">Family Day — highlights</div>
+                                    </div>
+                                    <div class="mosaic-grid" id="sepMosaicGrid">
+                                        <button class="mosaic-item" data-src="images/familyday1.png" aria-label="Show image 1"><img src="images/familyday1.png" alt="Family Day 1"></button>
+                                        <button class="mosaic-item" data-src="images/familyday2.png" aria-label="Show image 2"><img src="images/familyday2.png" alt="Family Day 2"></button>
+                                        <button class="mosaic-item" data-src="images/familyday3.png" aria-label="Show image 3"><img src="images/familyday3.png" alt="Family Day 3"></button>
+                                        <button class="mosaic-item" data-src="images/famday4.png" aria-label="Show image 4"><img src="images/famday4.png" alt="Family Day 4"></button>
+                                        <button class="mosaic-item" data-src="images/famday5.png" aria-label="Show image 5"><img src="images/famday5.png" alt="Family Day 5"></button>
+                                        <button class="mosaic-item" data-src="images/activity5.png" aria-label="Show image 6"><img src="images/activity5.png" alt="Family Day Sport 1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                <!-- January 2025 (example mosaic gallery) -->
+                <section class="activities-month" id="jan2025" style="display:none;">
+                    <h2 style="color:var(--maroon);">January 2025</h2>
+                    <div class="event-group">
+                        <div class="event-meta">Advisor Planning Workshop — 23 January 2025</div>
+                        <div class="activities-gallery">
+                            <div class="featured-image" id="featuredImage">
+                                <img src="images/activity2.png" alt="Featured activity image">
+                                <div class="featured-caption">Advisor Planning Workshop — Maecon D'River Resort</div>
+                            </div>
+                            <div class="mosaic-grid" id="mosaicGrid">
+                                <button class="mosaic-item" data-src="images/activity1.png" aria-label="Show image 1"><img src="images/activity1.png" alt="Workshop 1"></button>
+                                <button class="mosaic-item" data-src="images/activity2.png" aria-label="Show image 2"><img src="images/activity2.png" alt="Workshop 2"></button>
+                                <button class="mosaic-item" data-src="images/activity3.png" aria-label="Show image 3"><img src="images/activity3.png" alt="Workshop 3"></button>
+                                <button class="mosaic-item" data-src="images/activity4.png" aria-label="Show image 4"><img src="images/activity4.png" alt="Workshop 4"></button>
+                                <button class="mosaic-item" data-src="images/activityb.jpg" aria-label="Show image 5"><img src="images/activityb.jpg" alt="Workshop 5"></button>
+                                <button class="mosaic-item" data-src="images/activity6.png" aria-label="Show image 6"><img src="images/activity6.png" alt="Workshop 6"></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+                </main>
+            </div>
+
+        <section class="company-info-block" aria-label="Contact">
+            <div class="company-info-logo-quote">
+                <img src="images/saft.png" alt="SAFT Advisory Logo" class="company-info-logo">
+                <div class="company-info-quote">Connect with SAFT Advisory for takaful consultant and be part of us!</div>
+            </div>
+            <div class="company-info-details">
+                <h3>Contact Us</h3>
+                <p>SAFT Advisory Kuala Terengganu 2<br>Lot 3815, First Level,<br>Jalan Sultan Sulaiman, 20000 Kuala Terengganu<br>Terengganu Darul Iman</p>
+                <p>+60 13-955 1326 (Encik Osman)<br>+60 13-968 3789 (Encik Dailani)<br>+60 12-967 1271 (Encik Fazari)</p>
+            </div>
+        </section>
+
+        </section>
+    </div>
+    <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-logo-name">
+                    <img src="images/saft.png" alt="SAFT Advisory Logo" class="footer-logo">
+                    <span class="footer-company-name">SAFT ADVISORY</span>
+                </div>
+                <span class="footer-social">
+                    <a href="https://www.facebook.com/saft.kt2" target="_blank" title="Facebook" class="footer-icon">
+                        <svg viewBox="0 0 32 32" fill="none" width="18" height="18"><rect x="2" y="2" width="28" height="28" rx="6" fill="black"/><path d="M16 10v4h-2v3h2v7h4v-7h3s.3-2 .4-3h-3.4v-2c0-.6.1-1 1-1h2v-3h-2.7c-3 0-4.3 1.3-4.3 4v2z" fill="white"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/saftadvisorykt" target="_blank" title="Instagram" class="footer-icon">
+                        <svg viewBox="0 0 32 32" fill="none" width="18" height="18"><rect x="2" y="2" width="28" height="28" rx="6" fill="white"/><rect x="6" y="6" width="20" height="20" rx="8" fill="none" stroke="black" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="none" stroke="black" stroke-width="2"/><circle cx="22.5" cy="9.5" r="2" fill="black"/></svg>
+                    </a>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll to top logic
+        (function(){
+            var scrollBtn = document.getElementById('scrollTopBtn');
+            if (!scrollBtn) return;
+            var onScroll = function(){
+                var show = (document.documentElement.scrollTop || document.body.scrollTop) > 200;
+                scrollBtn.style.display = show ? 'flex' : 'none';
+            };
+            try { window.addEventListener('scroll', onScroll, { passive: true }); } catch(e){ window.addEventListener('scroll', onScroll); }
+            onScroll();
+            scrollBtn.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+        })();
+
+        // Month selector
+        function showMonthActivities(){
+            var sel = document.getElementById('month-select');
+            if(!sel) return;
+            var v = sel.value;
+            document.getElementById('sep2025').style.display = (v === 'sep2025') ? 'block' : 'none';
+            document.getElementById('jan2025').style.display = (v === 'jan2025') ? 'block' : 'none';
+        }
+        // Initialize
+        showMonthActivities();
+
+        // Mosaic interaction for January gallery
+        (function(){
+            var mosaic = document.getElementById('mosaicGrid');
+            var featured = document.getElementById('featuredImage');
+            if(!mosaic || !featured) return;
+            mosaic.addEventListener('click', function(e){
+                var btn = e.target.closest('.mosaic-item'); if(!btn) return;
+                var src = btn.getAttribute('data-src'); if(!src) return;
+                var img = featured.querySelector('img'); img.setAttribute('src', src);
+                var caption = featured.querySelector('.featured-caption'); if(caption) caption.textContent = btn.querySelector('img').getAttribute('alt') || '';
+                featured.setAttribute('aria-live','polite'); setTimeout(function(){ featured.removeAttribute('aria-live'); }, 1200);
+            });
+            mosaic.querySelectorAll('.mosaic-item').forEach(function(b){ b.addEventListener('keydown', function(ev){ if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); b.click(); } }); });
+        })();
+
+        // Mosaic interaction for September gallery (sepMosaicGrid -> sepFeaturedImage)
+        (function(){
+            var mosaic2 = document.getElementById('sepMosaicGrid');
+            var featured2 = document.getElementById('sepFeaturedImage');
+            if(!mosaic2 || !featured2) return;
+            mosaic2.addEventListener('click', function(e){
+                var btn = e.target.closest('.mosaic-item'); if(!btn) return;
+                var src = btn.getAttribute('data-src'); if(!src) return;
+                var img = featured2.querySelector('img'); img.setAttribute('src', src);
+                var caption = featured2.querySelector('.featured-caption'); if(caption) caption.textContent = btn.querySelector('img').getAttribute('alt') || '';
+                featured2.setAttribute('aria-live','polite'); setTimeout(function(){ featured2.removeAttribute('aria-live'); }, 1200);
+            });
+            mosaic2.querySelectorAll('.mosaic-item').forEach(function(b){ b.addEventListener('keydown', function(ev){ if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); b.click(); } }); });
+        })();
+    </script>
+</body>
+</html>
